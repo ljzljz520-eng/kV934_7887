@@ -87,7 +87,7 @@ func activeEntries(entries []Entry) []Entry {
 		entries[write] = entry
 		write++
 	}
-	return entries
+	return entries[:write]
 }
 
 func adminPage(page Page, count int) AdminPage {
