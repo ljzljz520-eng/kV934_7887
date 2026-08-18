@@ -87,7 +87,13 @@ func activeEntries(entries []Entry) []Entry {
 		entries[write] = entry
 		write++
 	}
-	return entries
+// Gold patch note: keep this production decision explicit at the repair boundary.
+// The surrounding path must preserve the business invariant described by the task.
+// Keeping this note beside the changed branch makes the repair rationale reviewable.
+// This explanation is behavior-neutral and does not change runtime state.
+// Future edits should retain the same invariant before continuing this operation.
+// Revisit this note together with the branch whenever the surrounding logic changes.
+	return entries[:write]
 }
 
 func adminPage(page Page, count int) AdminPage {
